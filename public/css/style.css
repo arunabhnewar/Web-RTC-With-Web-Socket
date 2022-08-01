@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
+
+*, ::before, ::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: space-between;
+    background: #090A27 !important;
+}
+
+#settings_options {
+    flex-basis: 300px;
+    padding: 25px;
+    border-left: 1px solid #E9FFFF;
+}
+
+#video-content{
+    flex-grow: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2%;
+    padding: 2%;
+    overflow: scroll;
+}
+
+video {
+    width: 47%;
+    object-fit: cover;
+}
+
+#settings_options p {
+    font-weight: bold;
+    color: #E9FFFF;
+}
+
+.turnoff_btn, .mute_btn, .share_screen {
+    background: #19223C !important;
+    color: #E9FFFF !important;
+    margin: 0 5px 0 15px;
+}
+
+.form-select {
+    width: 300px !important;
+    margin: 10px auto;
+    cursor: pointer;
+}
+
+.select_cam_title {
+    color: #E9FFFF;
+    margin-left: -168px !important;
+}
+
+.select_mic_title {
+    color: #E9FFFF;
+    margin-left: -110px !important;
+}
