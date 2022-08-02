@@ -5,6 +5,7 @@ const muteButton= document.getElementById('mute_button');
 const shareScreen= document.getElementById('share_screen_button');
 const camSelect= document.getElementById('camera_select');
 const micSelect = document.getElementById('mic_select');
+const chatForm = document.getElementById('chat_form');
 
 
 
@@ -20,6 +21,7 @@ let mute = false;
 let currentCamera;
 let RTCPeer;
 let myVideoId;
+let datachannel;
 
 
 
@@ -211,7 +213,10 @@ shareScreen.addEventListener('click', getScreenShare)
 function mediaDisplay(stream, selfStream) {
     const video = document.createElement('video');
 
-    if (selfStream) myVideoId = stream.id;
+    if (selfStream) {
+        myVideoId = stream.id;
+        video.muted = true;
+    };
  
     video.id = stream.id;
     video.srcObject = stream;
@@ -281,6 +286,23 @@ micSelect.addEventListener('input', (e) => {
 
 
 
+// Chat Form Handle
+chatForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    const chat = chatForm[0].value;
+    console.log(chat);
+    const chatUl = document.querySelector('.chat_display');
+    const li = document.createElement('li');
+    li.style.listStyle = "none";
+    li.style.color = "#E9FFFF";
+    li.textContent = "You : " + chat;
+
+    chatUl.appendChild(li);
+
+    datachannel.send(chat);
+    chatForm[0].value = ''
+})
+
 
 
 
@@ -335,6 +357,22 @@ function webRTCConnect() {
 
 // Make An Offer
 async function makeOffer() {
+
+    datachannel = RTCPeer.createDataChannel("chat");
+
+    datachannel.addEventListener('open', () => {
+        datachannel.addEventListener('message', (e) => {
+
+            const chatUl = document.querySelector('.chat_display');
+            const li = document.createElement('li');
+            li.style.color = "#E9FFFF";
+            li.style.listStyle = "none";
+            li.textContent = "Someone : " + e.data;
+
+            chatUl.appendChild(li);
+        })
+    })
+
     const offer = await RTCPeer.createOffer();
     RTCPeer.setLocalDescription(offer);
 
@@ -347,6 +385,22 @@ async function makeOffer() {
 
 // Receive An Offer
 socket.on('receiveOffer', async (offer) => {
+
+    RTCPeer.addEventListener('datachannel', (e) => {
+        datachannel = e.channel;
+        datachannel.addEventListener('message', (e) => {
+            
+            const chatUl = document.querySelector('.chat_display');
+            const li = document.createElement('li');
+            li.style.color = "#E9FFFF";
+            li.style.listStyle = "none";
+            li.textContent = "Someone : " + e.data;
+
+            chatUl.appendChild(li);
+        })
+    })
+
+
     RTCPeer.setRemoteDescription(offer);
     const answer = await RTCPeer.createAnswer();
     RTCPeer.setLocalDescription(answer);
@@ -368,5 +422,14 @@ socket.on('receiveAnswer', async (answer) => {
 socket.on('iceCandidateReceive', async (candidate) => {
     RTCPeer.addIceCandidate(candidate)
 })
+
+
+
+// 
+socket.on('someoneLeft', (socketId)=>{
+
+})
+
+
 
 

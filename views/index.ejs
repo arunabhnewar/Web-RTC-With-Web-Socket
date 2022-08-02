@@ -22,6 +22,8 @@
         <!------bootstrap scrip link--------->
         <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
 
+        <!-------font awesome link----------->
+        <script src="https://kit.fontawesome.com/c939d0e917.js"></script>
 
         <!------Socket io script link--------->
         <script src="/socket.io/socket.io.js"></script>
@@ -46,7 +48,7 @@
             </div>
 
             <div class="text-center my-3">
-                <h6 class="select_cam_title mt-5">Select Your Cam</h6>
+                <h6 class="select_cam_title mt-4">Select Your Cam</h6>
                 <select id="camera_select" ria-label="Default select example" class="form-select">
                 </select>
             </div>
@@ -55,6 +57,16 @@
                 <h6 class="select_mic_title mt-2">Select Your Microphone</h6>
                 <select id="mic_select" aria-label="Default select example" class="form-select">
                 </select>
+            </div>
+
+            <div class="chat_content mt-3">
+                <h6>Chat</h6>
+                <ul class="chat_display"></ul>
+
+                <form id="chat_form" class="chat_field">
+                    <input type="text" placeholder="Type your chat.." />
+                    <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                </form>
             </div>
         </div>
 

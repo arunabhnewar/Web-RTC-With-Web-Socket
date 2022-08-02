@@ -64,3 +64,41 @@ video {
     color: #E9FFFF;
     margin-left: -110px !important;
 }
+
+.chat_content h6 {
+    color: #E9FFFF;
+}
+
+.chat_content ul {
+    overflow-y: scroll;
+    height: 38vh;
+    border: 1px solid #E9FFFF;
+    padding: 5px 10px !important;
+}
+
+.chat_field {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #E9FFFF;
+    margin: 0 auto 10px;
+    border-radius: 4px;
+    padding: 5px 10px;
+}
+
+.chat_field input {
+    background-color: transparent;
+    border: 0;
+    color: #F5F5F5;
+    width: 90%;
+    height: 20%;
+    outline: 0;
+}
+
+.chat_field button {
+    width: 20%;
+    background: transparent;
+    border: 0;
+    color: #1E90FF;
+}

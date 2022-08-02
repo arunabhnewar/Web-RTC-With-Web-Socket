@@ -58,6 +58,12 @@ io.on('connection', (socket) => {
     socket.on('iceCandidateSend', (candidate, roomId) => {
         socket.to(roomId).emit('iceCandidateReceive', candidate)
     })
+
+
+    // Disconnect Event
+    socket.on('disconnect', () => {
+        io.emit('someoneLeft', socket.id)
+    })
 })
 
 
