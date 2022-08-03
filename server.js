@@ -69,6 +69,6 @@ io.on('connection', (socket) => {
 
 
 // Server listening
-expressHTTPServer.listen(3000, () => {
+expressHTTPServer.listen(process.env.PORT || 3000, () => {
     console.log("Server has been fucked up on port 3000");
 })
